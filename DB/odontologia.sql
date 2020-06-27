@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-06-2020 a las 00:27:21
+-- Tiempo de generación: 27-06-2020 a las 18:11:26
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.2.29
 
@@ -31,9 +31,16 @@ CREATE TABLE `citas` (
   `numero` int(11) NOT NULL,
   `fecha` date NOT NULL,
   `hora` time NOT NULL,
-  `ccPaciente` varchar(12) COLLATE utf8mb4_spanish_ci DEFAULT NULL,
-  `ccOdontologo` varchar(12) COLLATE utf8mb4_spanish_ci DEFAULT NULL
+  `nombresPaciente` varchar(100) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `nombresMedico` varchar(100) COLLATE utf8mb4_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `citas`
+--
+
+INSERT INTO `citas` (`numero`, `fecha`, `hora`, `nombresPaciente`, `nombresMedico`) VALUES
+(8, '2000-01-01', '10:50:00', 'pepito', 'pedrito');
 
 -- --------------------------------------------------------
 
@@ -47,30 +54,18 @@ CREATE TABLE `login` (
   `email` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
--- --------------------------------------------------------
-
 --
--- Estructura de tabla para la tabla `odontologos`
+-- Volcado de datos para la tabla `login`
 --
 
-CREATE TABLE `odontologos` (
-  `cedula` varchar(12) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `nombres` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `apellidos` varchar(12) COLLATE utf8mb4_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `paciente`
---
-
-CREATE TABLE `paciente` (
-  `cedula` varchar(12) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `nombres` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `apellidos` varchar(50) COLLATE utf8mb4_spanish_ci NOT NULL,
-  `genero` varchar(10) COLLATE utf8mb4_spanish_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+INSERT INTO `login` (`usuario`, `contraseña`, `email`) VALUES
+('111', '111', 'email@gmail.com'),
+('123132', '321', 'email@gmail.com'),
+('43124', '124', 'prueba@gmail.com'),
+('pepe', '123', 'pepito@gmail.com'),
+('prueba', 'prueba', 'prueba'),
+('Santi', '123', 'email@gmail.com'),
+('user', '123', 'email@gmail.com');
 
 --
 -- Índices para tablas volcadas
@@ -80,27 +75,13 @@ CREATE TABLE `paciente` (
 -- Indices de la tabla `citas`
 --
 ALTER TABLE `citas`
-  ADD PRIMARY KEY (`numero`),
-  ADD KEY `ccOdontologo` (`ccOdontologo`),
-  ADD KEY `ccPaciente` (`ccPaciente`);
+  ADD PRIMARY KEY (`numero`);
 
 --
 -- Indices de la tabla `login`
 --
 ALTER TABLE `login`
   ADD PRIMARY KEY (`usuario`);
-
---
--- Indices de la tabla `odontologos`
---
-ALTER TABLE `odontologos`
-  ADD PRIMARY KEY (`cedula`);
-
---
--- Indices de la tabla `paciente`
---
-ALTER TABLE `paciente`
-  ADD PRIMARY KEY (`cedula`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -110,18 +91,7 @@ ALTER TABLE `paciente`
 -- AUTO_INCREMENT de la tabla `citas`
 --
 ALTER TABLE `citas`
-  MODIFY `numero` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `citas`
---
-ALTER TABLE `citas`
-  ADD CONSTRAINT `citas_ibfk_1` FOREIGN KEY (`ccOdontologo`) REFERENCES `odontologos` (`cedula`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `citas_ibfk_2` FOREIGN KEY (`ccPaciente`) REFERENCES `paciente` (`cedula`) ON DELETE SET NULL ON UPDATE CASCADE;
+  MODIFY `numero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
