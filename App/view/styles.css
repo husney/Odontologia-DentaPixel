@@ -1,0 +1,12 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.mT{
+    margin-top: 25vh;
+}
+
+.brd{
+    border-radius: 5px;
+}
