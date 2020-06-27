@@ -1,3 +1,8 @@
+
+<?php
+    require("../dataAccess/Conexion.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,10 +29,56 @@
         </div>
     </div>
 
-    <div class="containe">
-        <div class="row">
+    
+
+    <div class="container">
+        <div class="row-my-1">
             <div class="col">
-                
+                <nav class="nav bg-dark brd ">
+                    <a class="btn btn-primary m-2" href="registroCita.php">Agendar Cita</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row my-2">
+            <div class="col">
+                <div class="">
+                    <table class="table bg-dark bordered table-hover table-dark">
+                        <thead>
+                            <th>Número</th>
+                            <th>Paciente</th>
+                            <th>Medico</th>
+                            <th>Fecha</th>
+                            <th>Hora</th>
+                            <td>Cancelar</td>
+                        </thead>
+
+                        <tbody>
+                            <?php 
+                                require("../controller/citas.php");
+                                $citas = mostrarCitas();
+                                foreach($citas as $key => $value){ ?>
+
+                                    <tr>
+                                        <td><?php echo $value[0]?></td>
+                                        <td><?php echo $value[1]?></td>
+                                        <td><?php echo $value[2]?></td>
+                                        <td><?php echo $value[3]?></td>
+                                        <td><?php echo $value[4]?></td>
+                                        <td><a class="btn btn-danger" onclick="javascript:return confirm('¿Desea cancelar esta cita?');" href="../controller/eliminarCita.php?num=<?php echo $value[0]?>">Cancelar</a></td>
+                                    </tr>
+
+                        <?php   }
+
+
+                            ?>
+                        </tbody>
+
+                    </table>
+
+                </div>
             </div>
         </div>
     </div>
